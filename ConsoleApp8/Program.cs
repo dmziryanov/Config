@@ -19,7 +19,7 @@ namespace ConsoleApp8
                 
                 for (var j = 0; j < s.hiddenTanks.Count; j++)
                 {
-                    Console.WriteLine(s.hiddenTanks[j].Settings);
+                    Console.WriteLine(s.hiddenTanks[j].Name);
                 }
             }
         }
@@ -96,7 +96,7 @@ namespace ConsoleApp8
     }
 
     [ConfigurationCollection(typeof(AdditionalSetting), AddItemName = "setting")]
-    public class IndusoftDataProviderCollection : ConfigurationElementCollection
+    public class SettingsCollection : ConfigurationElementCollection
     {
         protected override ConfigurationElement CreateNewElement()
         {
@@ -131,9 +131,9 @@ namespace ConsoleApp8
         {
             return ((hiddenTank)(element)).Name;
         }
-        public HiddenTankSection this[int idx]
+        public hiddenTank this[int idx]
         {
-            get { return (HiddenTankSection)BaseGet(idx); }
+            get { return (hiddenTank)BaseGet(idx); }
         }
         public static IEnumerable<IhiddenTank> GetDataProviders()
         {
@@ -146,9 +146,9 @@ namespace ConsoleApp8
     {
         const string DataProvidersMap = "settings";
         [ConfigurationProperty(DataProvidersMap)]
-        public IndusoftDataProviderCollection Settings
+        public SettingsCollection Settings
         {
-            get { return ((IndusoftDataProviderCollection)(base[DataProvidersMap])); }
+            get { return ((SettingsCollection)(base[DataProvidersMap])); }
         }
     }
 
